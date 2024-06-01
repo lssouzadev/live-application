@@ -11,6 +11,7 @@
 		"start": "nest start",
 		"start:dev": "nest start api --watch",
 		"start:worker": "nest start worker --watch",
+		"start:client": "nest start client --watch",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
@@ -18,10 +19,12 @@
 	"dependencies": {
 		"@nestjs/common": "^10.0.0",
 		"@nestjs/core": "^10.0.0",
+		"@nestjs/event-emitter": "^2.0.4",
 		"@nestjs/platform-express": "^10.0.0",
 		"@nestjs/platform-socket.io": "^10.3.8",
 		"@nestjs/websockets": "^10.3.8",
 		"@socket.io/redis-adapter": "^8.3.0",
+		"axios": "^1.7.2",
 		"redis": "^4.6.14",
 		"reflect-metadata": "^0.2.0",
 		"rxjs": "^7.8.1",

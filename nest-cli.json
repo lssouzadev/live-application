@@ -21,6 +21,14 @@
 			"compilerOptions": {
 				"tsConfigPath": "tsconfig.json"
 			}
+		},
+		"client": {
+			"type": "application",
+			"entryFile": "client",
+			"sourceRoot": "src",
+			"compilerOptions": {
+				"tsConfigPath": "tsconfig.json"
+			}
 		}
 	}
 }

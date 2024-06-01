@@ -17,11 +17,6 @@ export class IoClientAdapter implements WebSocketAdapter {
 	create(port: number, options?: SocketOptions): Socket {
 		const client = io('ws://127.0.0.1:6666', {
 			...options,
-			// auth: {
-			// 	session: process.argv[3],
-			// 	type: 'worker',
-			// 	authorization: `Bearer EMPTY`,
-			// },
 		})
 		this.io = client
 		return client

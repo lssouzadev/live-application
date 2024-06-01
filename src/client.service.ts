@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { Server } from 'socket.io'
 
 import { Injectable, OnModuleInit } from '@nestjs/common'
@@ -11,29 +10,26 @@ import { MessageBody, OnGatewayConnection, OnGatewayDisconnect, SubscribeMessage
 	reconnectInterval: 10000,
 	transports: ['websocket'],
 	auth: {
-		type: 'worker',
+		type: 'client',
 	},
 })
-export class WorkerService implements OnModuleInit, OnGatewayConnection, OnGatewayDisconnect {
+export class ClientService implements OnModuleInit, OnGatewayConnection, OnGatewayDisconnect {
 	@WebSocketServer() server: Server
 	constructor() {}
 
 	onModuleInit() {
-		this.server.emit('msgToClient', 'Hello from WorkerService')
-	}
-
-	@SubscribeMessage('getPosts')
-	async handleMessageToServer(@MessageBody() payload): Promise<void> {
-		const { limit } = payload
-
-		const response = await axios.get(`https://api.linkzap.ai/blog/posts`)
-		const posts = response.data.posts.slice(0, limit)
+		console.log('Requesting POSTs List')
 		this.server.emit('transmit', {
-			event: 'setPosts',
+			event: 'getPosts',
 			payload: {
-				posts,
+				limit: 3,
 			},
 		})
+	}
+
+	@SubscribeMessage('setPosts')
+	handleSetPosts(@MessageBody() payload) {
+		console.log('Setting posts:', payload)
 	}
 
 	handleConnection() {
